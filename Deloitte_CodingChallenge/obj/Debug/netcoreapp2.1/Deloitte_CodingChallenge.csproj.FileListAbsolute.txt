@@ -1,0 +1,11 @@
+E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\bin\Debug\netcoreapp2.1\Deloitte_CodingChallenge.deps.json
+E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\bin\Debug\netcoreapp2.1\Deloitte_CodingChallenge.runtimeconfig.json
+E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\bin\Debug\netcoreapp2.1\Deloitte_CodingChallenge.runtimeconfig.dev.json
+E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\bin\Debug\netcoreapp2.1\Deloitte_CodingChallenge.dll
+E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\bin\Debug\netcoreapp2.1\Deloitte_CodingChallenge.pdb
+E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\obj\Debug\netcoreapp2.1\Deloitte_CodingChallenge.csprojAssemblyReference.cache
+E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\obj\Debug\netcoreapp2.1\Deloitte_CodingChallenge.csproj.CoreCompileInputs.cache
+E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\obj\Debug\netcoreapp2.1\Deloitte_CodingChallenge.AssemblyInfoInputs.cache
+E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\obj\Debug\netcoreapp2.1\Deloitte_CodingChallenge.AssemblyInfo.cs
+E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\obj\Debug\netcoreapp2.1\Deloitte_CodingChallenge.dll
+E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\obj\Debug\netcoreapp2.1\Deloitte_CodingChallenge.pdb
