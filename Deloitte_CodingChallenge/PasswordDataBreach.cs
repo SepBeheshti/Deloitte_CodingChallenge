@@ -37,15 +37,13 @@ namespace Deloitte_CodingChallenge
             return hashedPassword.Substring(5);
         }
 
-        public static string GetBreachCount(string hashedPrefix, string hashedSuffix)
+        public static string GetBreachCount(string hashedPrefix, string hashedSuffix, string password)
         {
             string matchedPassword = "";
             HttpClient httpClient = new HttpClient();
             string result = httpClient.GetStringAsync("https://api.pwnedpasswords.com/range/" + hashedPrefix).Result;
-            //allMatchesList.Add(result);
-            // string passwordMatch = allMatchesList[allMatchesList.IndexOf(hashedSuffix)];
+            string path = Directory.GetCurrentDirectory() + @"passwords.txt";
 
-            string path = @"c:\temp\retrievedPasswords.txt";
             if (!File.Exists(path))
             {
                 // Create a file to write to.
@@ -55,21 +53,34 @@ namespace Deloitte_CodingChallenge
                 }
             }
 
-            //TODO: Catch exception when password does not exist in pulled data
-
             var lines = File.ReadAllLines(path);
-            foreach (var line in lines)
+
+            try
             {
-                if (line.Contains(hashedSuffix))
+                foreach (var line in lines)
                 {
-                    matchedPassword = line;
-                    break;
+                    if (line.Contains(hashedSuffix))
+                    {
+                        matchedPassword = line;
+                        break;
+                    }
+                }
+
+                String[] passwordCount = matchedPassword.Split(':');
+                File.Delete(path);
+
+                return passwordCount[1];
+            }
+            catch (IndexOutOfRangeException)
+            {
+                if (password.Length > 0)
+                {
+                    Console.WriteLine("\nThis Password has not been pwned!");
                 }
             }
 
-            String[] passwordCount = matchedPassword.Split(':');
-            File.Delete(path);
-            return passwordCount[1];
+            
+            return "";
         }
     }
 }
