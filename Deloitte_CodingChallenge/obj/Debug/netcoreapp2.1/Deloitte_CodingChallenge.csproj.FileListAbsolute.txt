@@ -8,3 +8,4 @@ E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\obj\Debug\netco
 E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\obj\Debug\netcoreapp2.1\Deloitte_CodingChallenge.AssemblyInfo.cs
 E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\obj\Debug\netcoreapp2.1\Deloitte_CodingChallenge.dll
 E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\obj\Debug\netcoreapp2.1\Deloitte_CodingChallenge.pdb
+E:\Programming\Deloitte_CodingChallenge\Deloitte_CodingChallenge\obj\Debug\netcoreapp2.1\Deloitte_CodingChallenge.csprojAssemblyReference.cache

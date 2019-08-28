@@ -48,9 +48,23 @@ namespace Deloitte_CodingChallenge
                 User user = new User(username, password);
                 PasswordCheck.PasswordValidator(user.Username, user.Password);
 
+                string hashPassword = PasswordDataBreach.HashPassword(user.Password);
+                string partialHash = PasswordDataBreach.PartialHash(hashPassword);
+                string hashSuffix = PasswordDataBreach.HashSuffix(hashPassword);
+                string passwordBreachCount = PasswordDataBreach.GetBreachCount(partialHash, hashSuffix);
+
+               // Console.WriteLine(PasswordDataBreach.PartialHash(PasswordDataBreach.HashPassword(user.Password)));
+               // Console.WriteLine(PasswordDataBreach.HashSuffix(PasswordDataBreach.HashPassword(user.Password)));
+               // Console.WriteLine(PasswordDataBreach.GetBreachCount(PasswordDataBreach.PartialHash(PasswordDataBreach.HashPassword(user.Password)), (PasswordDataBreach.HashSuffix(PasswordDataBreach.HashPassword(user.Password)))));
+
                 Console.WriteLine("\nThe password strength is: " +
                                   PasswordCheck.PasswordStrength(user.Username, user.Password) + "\n");
-                Console.WriteLine("The provided password has appeared in a data breach " + 0 + " times! \n");
+                if (passwordBreachCount.Length > 0)
+                {
+                    Console.WriteLine("The provided password has appeared in a data breach " + passwordBreachCount +
+                                      " times! \n");
+                }
+
                 Console.Write("\nWould you like to calculate one more time? (Y/N) ");
                 text = Console.ReadLine();
                 Console.Write("\n");
