@@ -1,55 +1,60 @@
 ﻿using System;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 
 
 namespace Deloitte_CodingChallenge
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            string username = "";
-            string password = "";
-
-            Console.WriteLine("Hello and welcome to the Platform Engineering password strength checker tool!");
-
-            Console.WriteLine("-----------------------------------------------------------------------------\n");
-            
-            Console.WriteLine("Please enter the following information:\n");
-
-            Console.Write("Username: ");
-            username = Console.ReadLine();
-
-            Console.Write("Password: ");
-
+            string text;
             do
             {
-                ConsoleKeyInfo character = Console.ReadKey(true);
-                if (character.Key != ConsoleKey.Backspace && character.Key != ConsoleKey.Enter)
+                string username = "";
+                string password = "";
+
+                Console.WriteLine("Hello and welcome to the Platform Engineering password strength checker tool!");
+
+                Console.WriteLine("-----------------------------------------------------------------------------\n");
+
+                Console.WriteLine("Please enter the following information:\n");
+
+                Console.Write("Username: ");
+                username = Console.ReadLine();
+
+                Console.Write("Password: ");
+
+                do
                 {
-                    password += character.KeyChar;
-                    Console.Write("*");
-                }
-                else
-                {
-                    if (character.Key == ConsoleKey.Enter)
+                    ConsoleKeyInfo character = Console.ReadKey(true);
+                    if (character.Key != ConsoleKey.Backspace && character.Key != ConsoleKey.Enter &&
+                        character.Key != ConsoleKey.Spacebar)
                     {
-                        //PasswordCheck.MinimumCharacterCheck(password);
-                        //if (PasswordCheck.PasswordValidator(username, password))
-                        //{
-                            break;
-                        //}
-                        //password = "";
-                        //Console.Write("Password: ");
+                        password += character.KeyChar;
+                        Console.Write("*");
                     }
-                }
-            } while (true);
-            
-            //while (PasswordCheck.MinimumCharacterCheck(password))
+                    else
+                    {
+                        if (character.Key == ConsoleKey.Enter)
+                        {
+                            Console.WriteLine("\n");
+                            break;
+                        }
+                    }
+                } while (true);
 
+                User user = new User(username, password);
+                PasswordCheck.PasswordValidator(user.Username, user.Password);
 
-            Console.WriteLine("\n\nThe password strength is: " + PasswordCheck.PasswordStrength(username, password) + "\n");
-            Console.WriteLine("The provided password has appeared in a data breach " + 0 + " times! \n");
+                Console.WriteLine("\nThe password strength is: " +
+                                  PasswordCheck.PasswordStrength(user.Username, user.Password) + "\n");
+                Console.WriteLine("The provided password has appeared in a data breach " + 0 + " times! \n");
+                Console.Write("\nWould you like to calculate one more time? (Y/N) ");
+                text = Console.ReadLine();
+                Console.Write("\n");
+            } while (text.ToLower() == "y");
         }
     }
 }

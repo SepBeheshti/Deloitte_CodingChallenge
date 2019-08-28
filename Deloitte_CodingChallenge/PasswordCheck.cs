@@ -6,47 +6,79 @@ using System.Text.RegularExpressions;
 
 namespace Deloitte_CodingChallenge
 {
-    class PasswordCheck
+    public class PasswordCheck
     {
+        public static string UsernameNullCheck(string username)
+        {
+            if (String.IsNullOrEmpty(username))
+            {
+                throw new ArgumentNullException("username", "A username must be provided!");
+            }
+
+            return username;
+        }
+
+        public static string PasswordNullCheck(string password)
+        {
+            if (String.IsNullOrEmpty(password))
+            {
+                throw new ArgumentNullException("Password", "The password must be filled in!");
+            }
+
+            return password;
+        }
+
 
         public static bool PasswordValidator(string username, string password)
         {
-            bool result = true;
+            bool result;
             List<bool> allConditions = new List<bool>();
-            string setPassword = password;
+            string thePassword;
+            string theUsername;
             var specialCharacterCheck = new Regex("^[a-zA-Z0-9 ]*$");
+            
+             try
+             {
+                 thePassword = PasswordNullCheck(password);
+                 theUsername = UsernameNullCheck(username);
 
-            if (password.Length < 8)
-            {
-                Console.WriteLine("  The provided password is too short. Please provide a password with at least 8 characters!");
-                allConditions.Add(false);
-            }
+                 if (thePassword.Length < 8)
+                 {
+                     Console.WriteLine(
+                         " The provided password is too short. Please provide a password with at least 8 characters!");
+                     allConditions.Add(false);
+                 }
 
-            if (setPassword.Contains(username))
-            {
-                Console.WriteLine(" Your password cannot contain your username.");
-                allConditions.Add(false);
-            }
+                 if (thePassword.ToLower().Contains(theUsername))
+                 {
+                     Console.WriteLine(" Your password cannot contain your username.");
+                     allConditions.Add(false);
+                 }
 
-            if (specialCharacterCheck.IsMatch(password))
-            {
-                Console.WriteLine(" Your password must contain at least one special character!");
-                allConditions.Add(false);
-            }
+                 if (specialCharacterCheck.IsMatch(thePassword))
+                 {
+                     Console.WriteLine(" Your password must contain at least one special character!");
+                     allConditions.Add(false);
+                 }
 
-            if (!password.Any(Char.IsUpper))
-            {
-                Console.WriteLine(" Your password must contain at least one upper case character!");
-                allConditions.Add(false);
-            }
+                 if (!thePassword.Any(Char.IsUpper))
+                 {
+                     Console.WriteLine(" Your password must contain at least one upper case character!");
+                     allConditions.Add(false);
+                 }
 
-            if (!password.Any(Char.IsNumber))
-            {
-                Console.WriteLine(" Your password must contain at least one number!");
-                allConditions.Add(false);
-            }
+                 if (!thePassword.Any(Char.IsNumber))
+                 {
+                     Console.WriteLine(" Your password must contain at least one number!");
+                     allConditions.Add(false);
+                 }
+             }
+             catch (ArgumentNullException e)
+             {
+                 Console.WriteLine("A username and password must be provided!");
+             }
 
-            result = allConditions.Contains(false) ? false : true;
+             result = allConditions.Contains(false) ? false : true;
 
             return result;
         }
@@ -59,22 +91,22 @@ namespace Deloitte_CodingChallenge
             int lengthPassword = password.Length;
             int uniqueCharPool = 0;
 
-            if (password.Any(Char.IsLower))
+            if (password.All(Char.IsLower))
             {
                 uniqueCharPool += (int)PasswordEntropy.lowercase;
             }
 
-            if (password.Any(Char.IsLower) && password.Any(Char.IsUpper))
+            if ((password.Any(Char.IsLower) && password.Any(Char.IsUpper)) && !password.Any(Char.IsNumber))
             {
                 uniqueCharPool += (int)PasswordEntropy.lowerAndUpperCase;
             }
 
-            if (password.Any(Char.IsLetterOrDigit))
+            if (password.Any(Char.IsNumber) && password.Any(Char.IsLower) && !password.Any(Char.IsUpper))
             {
                 uniqueCharPool += (int)PasswordEntropy.alphanumeric;
             }
 
-            if (password.Any(Char.IsLetterOrDigit) && password.Any(Char.IsUpper))
+            if ((password.Any(Char.IsLower) && password.Any(Char.IsUpper)) && password.Any(Char.IsNumber))
             {
                 uniqueCharPool += (int)PasswordEntropy.alphanumericAndUpperCase;
             }
