@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 
 
 namespace Deloitte_CodingChallenge
@@ -35,7 +33,12 @@ namespace Deloitte_CodingChallenge
                     }
                     else
                     {
-                        if (character.Key == ConsoleKey.Enter)
+                        if (character.Key == ConsoleKey.Backspace && password.Length > 0)
+                        {
+                            password = password.Substring(0, (password.Length - 1));
+                            Console.Write("\b \b");
+                        }
+                        else if (character.Key == ConsoleKey.Enter)
                         {
                             Console.WriteLine("\n");
                             break;
@@ -56,7 +59,7 @@ namespace Deloitte_CodingChallenge
                     string passwordStrengthCategory = PasswordCheck.PasswordStrengthCategory(passwordStrength);
                     string passwordBreachCount =
                         PasswordDataBreach.GetBreachCount(partialHash, hashSuffix, user.Password);
-                    
+
                     Console.WriteLine("\nThe password strength is: " + passwordStrength);
                     Console.Write("The entered password is a " + passwordStrengthCategory);
                     Console.WriteLine("\n");
