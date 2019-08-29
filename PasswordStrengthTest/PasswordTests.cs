@@ -350,7 +350,7 @@ namespace PasswordStrengthTest
             bool expected = true;
             
             bool actual = result.Length > 0;
-            Assert.AreEqual(expected, actual, "The password has not been pwned");
+            Assert.AreEqual(expected, actual, "The password has not been leaked");
         }
         [TestMethod]
         public void PasswordBreach_FoundCount()
@@ -367,7 +367,7 @@ namespace PasswordStrengthTest
             string expected = "45011";
 
             string actual = result;
-            Assert.AreEqual(expected, actual, "The password has not been pwned!");
+            Assert.AreEqual(expected, actual, "The password has not been leaked");
         }
         [TestMethod]
         public void PasswordBreach_NotPwned()
@@ -384,7 +384,72 @@ namespace PasswordStrengthTest
             string expected = "";
 
             string actual = result;
-            Assert.AreEqual(expected, actual, "The password has been pwned!");
+            Assert.AreEqual(expected, actual, "The password has been leaked");
+        }
+        [TestMethod]
+        public void VeryWeakPasswordCheck()
+        {
+            string username = "Sep";
+            string password = "test";
+            User testUser = new User(username, password);
+            double passwordStrength = PasswordCheck.PasswordStrength(testUser.Username,testUser.Password);
+            string passwordStrengthCategory = PasswordCheck.PasswordStrengthCategory(passwordStrength);
+
+            string expected = "Very Weak Password";
+
+            Assert.AreEqual(expected, passwordStrengthCategory, "The password is not very weak");
+        }
+        [TestMethod]
+        public void WeakPasswordCheck()
+        {
+            string username = "Sep";
+            string password = "test12";
+            User testUser = new User(username, password);
+            double passwordStrength = PasswordCheck.PasswordStrength(testUser.Username, testUser.Password);
+            string passwordStrengthCategory = PasswordCheck.PasswordStrengthCategory(passwordStrength);
+
+            string expected = "Weak Password";
+
+            Assert.AreEqual(expected, passwordStrengthCategory, "The password is not weak");
+        }
+        [TestMethod]
+        public void ReasonablePasswordCheck()
+        {
+            string username = "Sep";
+            string password = "test12!";
+            User testUser = new User(username, password);
+            double passwordStrength = PasswordCheck.PasswordStrength(testUser.Username, testUser.Password);
+            string passwordStrengthCategory = PasswordCheck.PasswordStrengthCategory(passwordStrength);
+
+            string expected = "Reasonable Password";
+
+            Assert.AreEqual(expected, passwordStrengthCategory, "The password is not reasonable");
+        }
+        [TestMethod]
+        public void StrongPasswordCheck()
+        {
+            string username = "Sep";
+            string password = "Thisisatest1234!";
+            User testUser = new User(username, password);
+            double passwordStrength = PasswordCheck.PasswordStrength(testUser.Username, testUser.Password);
+            string passwordStrengthCategory = PasswordCheck.PasswordStrengthCategory(passwordStrength);
+
+            string expected = "Strong Password";
+
+            Assert.AreEqual(expected, passwordStrengthCategory, "The password is not strong");
+        }
+        [TestMethod]
+        public void VeryStrongPasswordCheck()
+        {
+            string username = "Sep";
+            string password = "AVery!C0mpL3xP4ssW0rd$!159874";
+            User testUser = new User(username, password);
+            double passwordStrength = PasswordCheck.PasswordStrength(testUser.Username, testUser.Password);
+            string passwordStrengthCategory = PasswordCheck.PasswordStrengthCategory(passwordStrength);
+
+            string expected = "Very Strong Password";
+
+            Assert.AreEqual(expected, passwordStrengthCategory, "The password is not very strong");
         }
 
 

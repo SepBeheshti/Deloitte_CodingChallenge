@@ -42,32 +42,31 @@ namespace Deloitte_CodingChallenge
 
                 if (password.Length < 8)
                  {
-                     Console.WriteLine(
-                         " The provided password is too short. Please provide a password with at least 8 characters!");
+                     Console.WriteLine(" The provided password is too short. Please provide a password with at least 8 characters!");
                      allConditions.Add(false);
                  }
 
                  if (password.ToLower().Contains(username))
                  {
-                     Console.WriteLine(" Your password cannot contain your username.");
+                     Console.WriteLine(" Your password should not contain your username.");
                      allConditions.Add(false);
                  }
 
                  if (specialCharacterCheck.IsMatch(password))
                  {
-                     Console.WriteLine(" Your password must contain at least one special character!");
+                     Console.WriteLine(" Your password should contain at least one special character!");
                      allConditions.Add(false);
                  }
 
                  if (!password.Any(Char.IsUpper))
                  {
-                     Console.WriteLine(" Your password must contain at least one upper case character!");
+                     Console.WriteLine(" Your password should contain at least one upper case character!");
                      allConditions.Add(false);
                  }
 
                  if (!password.Any(Char.IsNumber))
                  {
-                     Console.WriteLine(" Your password must contain at least one number!");
+                     Console.WriteLine(" Your password should contain at least one number!");
                      allConditions.Add(false);
                  }
             }
@@ -111,6 +110,28 @@ namespace Deloitte_CodingChallenge
             totalStrength = Math.Ceiling(Math.Log(Math.Pow(uniqueCharPool, lengthPassword), 2));
 
             return totalStrength;
+        }
+
+        public static string PasswordStrengthCategory(double passwordStrength)
+        {
+            if (passwordStrength < 28)
+            {
+                return "Very Weak Password";
+            } else if (passwordStrength >= 28 && passwordStrength <= 35)
+            {
+                return "Weak Password";
+            } else if (passwordStrength >= 36 && passwordStrength <= 59)
+            {
+                return "Reasonable Password";
+            } else if (passwordStrength >= 60 && passwordStrength <= 127)
+            {
+                return "Strong Password";
+            } else if (passwordStrength >= 127)
+            {
+                return "Very Strong Password";
+            }
+
+            return "The password is not valid!";
         }
 
     }
