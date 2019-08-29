@@ -1,7 +1,19 @@
 # Deloitte_PasswordChecker
 This is a program that evaluates a provided passwords strength, provides feedback for increasing the complexity of a password and also checks to see whether the password has been breached or not.
 
-The password complexity is calculated through finding the password entropy in bits:
+## Requirements
+
+This program has been implemented in C# using  **[.Net Core 2.2](https://dotnet.microsoft.com/download)**.
+
+```
+Both the tests and the application have been developed through .Net Core 2.2
+
+In order to run the application please ensure the .Net Core 2.2 SDK is installed for Visual Studio.
+```
+
+## Calculating Password Strength
+
+The password strength is calculated through finding the password entropy in bits:
 ```
 Depending on the password and characters a the "Pool of Characters Possible" will need to be determined:
         lowercase = 26,
@@ -27,16 +39,22 @@ is through the following guidelines:
 Apart from that, the user will be provided with additional guidelines to increase the complexity of their password.
 ```
 
-While calculating the strength, the program checks to see whether the password has been leaked and how
-many times by querying the HaveIBeenPwned V2 API:
+## Number of times the password has been leaked
+
+After calculating the strength, the program checks to see whether the password has been leaked and how
+many times by querying the [HaveIBeenPwned V2 API](https://haveibeenpwned.com/API/v2#PwnedPasswords):
 ```
 1. The password is hashed using the SHA1 hashing algorithm
+
 2. The first 5 characters of the hashed password is extracted as the prefix (to comply with the 
 k-Anonymity model) and the remaining characters are stored as the suffix
+
 3. Using the prefix, a GET request is sent to the API and all results with that prefix are returned 
-(300-500 results)
-4. The results from the GET request are stored in a textfile and using sequential searching of the suffix 
-the password is found
-5. The second part of the string determines the number of times the password has been breached and pwned,
-therefore this is relayed to the user on the console application
+(381-584 results)
+
+4. The results from the GET request are stored in a List and the passwords suffix is queried using LINQ
+        - The result is formatted as follows: 0136E006E24E7D152139815FB0FC6A50B15:2
+
+5. The second part of the returned string determines the number of times the password has been breached and
+this is relayed to the user on the console application
 ```
