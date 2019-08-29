@@ -39,10 +39,8 @@ namespace Deloitte_CodingChallenge
 
         public static string GetBreachCount(string hashedPrefix, string hashedSuffix, string password)
         {
-            string matchedPassword = "";
             HttpClient httpClient = new HttpClient();
             string result = httpClient.GetStringAsync("https://api.pwnedpasswords.com/range/" + hashedPrefix).Result;
-            string path = Directory.GetCurrentDirectory() + @"passwords.txt";
             List<string> splitResult = new List<string>();
 
             splitResult = result.Split("\r\n").ToList();
@@ -55,7 +53,7 @@ namespace Deloitte_CodingChallenge
             }
             catch (ArgumentOutOfRangeException e)
             {
-                Console.WriteLine("\nThis Password has not been pwned!");
+                Console.WriteLine("\nThis Password has not been leaked!");
             }
  
             return "";

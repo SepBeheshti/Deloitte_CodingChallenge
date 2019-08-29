@@ -12,7 +12,7 @@ namespace Deloitte_CodingChallenge
         {
             if (String.IsNullOrEmpty(username))
             {
-                throw new ArgumentNullException("username", "A username must be provided!");
+                throw new ArgumentNullException("Username", "A username must be provided!");
             }
 
             return username;
@@ -29,56 +29,54 @@ namespace Deloitte_CodingChallenge
         }
 
 
-        public static bool PasswordValidator(string username, string password)
+        public static bool isPasswordValid(string username, string password)
         {
             bool result;
             List<bool> allConditions = new List<bool>();
-            string thePassword;
-            string theUsername;
             var specialCharacterCheck = new Regex("^[a-zA-Z0-9 ]*$");
-            
-             try
-             {
-                 thePassword = PasswordNullCheck(password);
-                 theUsername = UsernameNullCheck(username);
 
-                 if (thePassword.Length < 8)
+            try
+            {
+                 UsernameNullCheck(username);
+                 PasswordNullCheck(password);
+
+                if (password.Length < 8)
                  {
                      Console.WriteLine(
                          " The provided password is too short. Please provide a password with at least 8 characters!");
                      allConditions.Add(false);
                  }
 
-                 if (thePassword.ToLower().Contains(theUsername))
+                 if (password.ToLower().Contains(username))
                  {
                      Console.WriteLine(" Your password cannot contain your username.");
                      allConditions.Add(false);
                  }
 
-                 if (specialCharacterCheck.IsMatch(thePassword))
+                 if (specialCharacterCheck.IsMatch(password))
                  {
                      Console.WriteLine(" Your password must contain at least one special character!");
                      allConditions.Add(false);
                  }
 
-                 if (!thePassword.Any(Char.IsUpper))
+                 if (!password.Any(Char.IsUpper))
                  {
                      Console.WriteLine(" Your password must contain at least one upper case character!");
                      allConditions.Add(false);
                  }
 
-                 if (!thePassword.Any(Char.IsNumber))
+                 if (!password.Any(Char.IsNumber))
                  {
                      Console.WriteLine(" Your password must contain at least one number!");
                      allConditions.Add(false);
                  }
-             }
-             catch (ArgumentNullException e)
-             {
-                 Console.WriteLine("A username and password must be provided!");
-             }
+            }
+            catch (ArgumentNullException e)
+            {
+                 Console.WriteLine(e.Message);
+            }
 
-             result = allConditions.Contains(false) ? false : true;
+            result = allConditions.Contains(false) ? false : true;
 
             return result;
         }
@@ -86,7 +84,6 @@ namespace Deloitte_CodingChallenge
 
         public static double PasswordStrength(string username, string password)
         {
-            char[] passwordChars = password.ToCharArray();
             double totalStrength;
             int lengthPassword = password.Length;
             int uniqueCharPool = 0;

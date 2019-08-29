@@ -46,22 +46,26 @@ namespace Deloitte_CodingChallenge
                 } while (true);
 
                 User user = new User(username, password);
-                PasswordCheck.PasswordValidator(user.Username, user.Password);
-
-                string hashPassword = PasswordDataBreach.HashPassword(user.Password);
-                string partialHash = PasswordDataBreach.PartialHash(hashPassword);
-                string hashSuffix = PasswordDataBreach.HashSuffix(hashPassword);
-                string passwordBreachCount = PasswordDataBreach.GetBreachCount(partialHash, hashSuffix, user.Password);
-
-                Console.WriteLine("\nThe password strength is: " +
-                                  PasswordCheck.PasswordStrength(user.Username, user.Password) + "\n");
-
-                if (passwordBreachCount.Length > 0)
+                PasswordCheck.isPasswordValid(user.Username, user.Password);
+                if (user.Username != "" && user.Password != "")
                 {
-                    Console.WriteLine("The provided password has appeared in a data breach " + passwordBreachCount +
-                                      " times! \n");
-                }
+                    //PasswordCheck.isPasswordValid(user.Username, user.Password);
 
+                    string hashPassword = PasswordDataBreach.HashPassword(user.Password);
+                    string partialHash = PasswordDataBreach.PartialHash(hashPassword);
+                    string hashSuffix = PasswordDataBreach.HashSuffix(hashPassword);
+                    string passwordBreachCount =
+                        PasswordDataBreach.GetBreachCount(partialHash, hashSuffix, user.Password);
+
+                    Console.WriteLine("\nThe password strength is: " +
+                                      PasswordCheck.PasswordStrength(user.Username, user.Password) + "\n");
+
+                    if (passwordBreachCount.Length > 0)
+                    {
+                        Console.WriteLine("The provided password has appeared in a data breach " + passwordBreachCount +
+                                          " times! \n");
+                    }
+                }
                 Console.Write("\nWould you like to calculate one more time? (Y/N) ");
                 text = Console.ReadLine();
                 Console.Write("\n");
