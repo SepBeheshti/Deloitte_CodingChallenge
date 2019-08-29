@@ -30,13 +30,13 @@ Apart from that, the user will be provided with additional guidelines to increas
 While calculating the strength, the program checks to see whether the password has been leaked and how
 many times by querying the HaveIBeenPwned V2 API:
 ```
-1) The password is hashed using the SHA1 hashing algorithm
-2) The first 5 characters of the hashed password is extracted as the prefix (to comply with the 
+1. The password is hashed using the SHA1 hashing algorithm
+2. The first 5 characters of the hashed password is extracted as the prefix (to comply with the 
 k-Anonymity model) and the remaining characters are stored as the suffix
-3) Using the prefix, a GET request is sent to the API and all results with that prefix are returned 
+3. Using the prefix, a GET request is sent to the API and all results with that prefix are returned 
 (300-500 results)
-4) The results from the GET request are stored in a textfile and using sequential searching of the suffix 
+4. The results from the GET request are stored in a textfile and using sequential searching of the suffix 
 the password is found
-5) The second part of the string determines the number of times the password has been breached and pwned,
+5. The second part of the string determines the number of times the password has been breached and pwned,
 therefore this is relayed to the user on the console application
 ```
